@@ -4,6 +4,7 @@ import com.google.common.eventbus.Subscribe;
 import com.plotsquared.core.api.PlotAPI;
 import com.plotsquared.core.events.PlotRateEvent;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
@@ -18,7 +19,6 @@ public final class PlotRating extends JavaPlugin {
     List<String> list = OwnerList.getList();
 
 
-
     @Override
     public void onEnable() {
         System.out.println("Plot Rating Loaded");
@@ -28,42 +28,45 @@ public final class PlotRating extends JavaPlugin {
         config.options().copyDefaults(true);
         saveConfig();
         PluginManager pm = getServer().getPluginManager();
-        //pm.registerEvents(new PlayerJoinListener(this), this);
-
-
-
 
 
     }
-    public class P2Listener{
 
-
-
+    public class P2Listener {
 
 
         final FileConfiguration config = getConfig();
 
         @Subscribe
-        public void onPlotRateEvent(PlotRateEvent event){
+        public void onPlotRateEvent(PlotRateEvent event) {
             String senderCommand = config.getString("SenderCommand");
             String plotOwnerCommand = config.getString("PlotOwnerCommand");
             String plotOwnerCommandAfter = config.getString("PlotOwnerCommandAfter");
             String senderCommandAfter = config.getString("SenderCommandAfter");
-            //double rating = event.getPlot().getAverageRating();
+            event.getPlot().getMembers();
             UUID owner = event.getPlot().getOwner();
             Player owners = Bukkit.getPlayer(owner);
-            //if(Bukkit.getPlayerExact(String.valueOf(owners)) != null) {
+            event.getRater().sendMessage(ChatColor.DARK_PURPLE + "Thank you for rating the plot ");
             event.getRater().sendMessage("It worked");
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), senderCommand + " " + event.getRater() + " " + senderCommandAfter);
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), plotOwnerCommand + " " + Objects.requireNonNull(Bukkit.getPlayer(owner)).getName() + " " + plotOwnerCommandAfter);
+            //if (Bukkit.getPlayer(owner) != null) {
+            try {
+                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), plotOwnerCommand + " " + Objects.requireNonNull(Bukkit.getPlayer(owner)).getName() + " " + plotOwnerCommandAfter);
+            }catch(NullPointerException e){
+                System.out.println("Error Occurred, owner of plot is most likely offline ");
+
             }
-            //else if(Bukkit.getPlayerExact(String.valueOf(owners))== null){
-               // list.add(String.valueOf(owners));
+
+
+                //} else if (Bukkit.getPlayer(owner) == null) {
+               // Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "QueuedCommand" + " " + Objects.requireNonNull(Bukkit.getPlayer(owner)).getName() + " " + plotOwnerCommand + plotOwnerCommandAfter);
             //}
 
+        }
     }
+
         @Override
-    public void onDisable() {
-        System.out.println("Shutting Down Rating Plugin");
-    }
+        public void onDisable() {
+            System.out.println("Shutting Down Rating Plugin");
+        }
 }
