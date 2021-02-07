@@ -8,113 +8,65 @@ https://ambmt.xyz
     <img src="images/Advancius-A.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">Advancius Plugins</h3>
+## Prerequisites
 
-  <p align="center">
-    A really simple plugin to add rating rewards to plots
-    <br />
-    <a href="https://github.com/Advancius/plotrating/issues"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/Advancius/plotrating/issues">View Demo</a>
-    ·
-    <a href="https://github.com/Advancius/plotrating/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/Advancius/plotrating/issues">Request Feature</a>
-  </p>
-</p>
+In order to try this out you need the following software to be installed on your machine:
 
+* Java version 8 or above (e.g. [OpenJDK](https://openjdk.java.net/install/))
+* [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+* [docker](https://docs.docker.com/v17.09/engine/installation/)
 
+## Quickstart
 
-<!-- TABLE OF CONTENTS -->
-<details open="open">
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With Java</a></li>
-      </ul>
-    </li>
-    <li>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
- 
-  </ol>
-</details>
+Clone the template project to your system:
+````bash
+git clone https://github.com/Advancius/plotrating
+````
 
+This project uses [Maven](https://maven.apache.org/) for building. So on your command line run
 
+````bash
+mvn package
+```` 
 
-### Built With
+To test the plugin we fire up the spigot Minecraft server using an existing docker image.
+In order for it to find the jar containing our plugin we need to mount the `target` folder to `/data/plugins`
 
-This section should list any major frameworks that you built your project using.
-*[Java] Java
-*[Mc-Plugin]PlotSquared
+````bash
+docker run --rm -e EULA=true  -p 25565:25565 -v $(pwd)/target:/data/plugins cmunroe/spigot:1.16.4 
+````
 
+To test it with bukkit do:
 
-<!-- GETTING STARTED -->
-## Getting Started
+````bash
+docker run --rm -e EULA=true  -p 25565:25565 -v $(pwd)/target:/data/plugins cmunroe/bukkit:1.16.4
+````
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+In the log produced by the server on the command line watch out for the following lines indicating that the plugin
+was deployed properly:
 
-### Prerequisites
+```
+[19:33:52 INFO]: [PlotRating Plugin] Enabling PlotRating v1.0
+``` 
 
-This is for 1.16.5, and has a dependency of PlotSquared.
-### Installation
+Start the Mincraft client on your computer and connect to the local Mincraft server by specifying `localhost` as Server Address.
 
-1.Get PlotSquared
-2.Drop and drag both plugins into plugin folder
-3. Restart/start server
-   ```
+Open the command line in Minecraft (by pressing `t`) try the new command and see what happens:
+```
+/rate 10 (while in a plot will give you and the plot owner a reward)
+/configreload
+````
 
+To play with the code e.g. import this plugin in [Intellij](https://www.jetbrains.com/de-de/idea/download/). The
+community edition is absolutely sufficient. Read [here](https://www.jetbrains.com/help/idea/maven-support.html) how to
+import an existing Maven project.
 
+Once you're done fiddling with the code don't forget to run `mvn package` and restarting the docker image for
+your changes to take effect.
 
+To install your plugin in another Minecraft server just copy the file `target/plotrating` to
+that server's `plugin` folder. 
 
+## Detailed instructions
 
-
-
-<!-- ROADMAP -->
-## Roadmap
-
-See the [open issues](https://github.com/Advancius/plotrating/issues) for a list of proposed features (and known issues).
-
-
-
-<!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-
-
-<!-- LICENSE -->
-## License
-
-Distributed under the MIT License. See `LICENSE` for more information.
-
-
-
-<!-- CONTACT -->
-## Contact
-
-Your Name - [@ambmt](https://twitter.com/ambmt) - dev@ambmt.xyz
-
-Project Link: [https://github.com/Advancius/plotrating](https://github.com/Advancius/plotrating)
-
-
-
+TODO - contributions welcome! 
