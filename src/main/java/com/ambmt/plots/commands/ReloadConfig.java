@@ -1,9 +1,11 @@
-package com.ambmt.plots;
+package com.ambmt.plots.commands;
 
+import com.ambmt.plots.PlotRating;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginDescriptionFile;
 
@@ -16,7 +18,8 @@ public class ReloadConfig implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
-        if (cmd.getName().equalsIgnoreCase("reload-PlotRating")) {
+        final FileConfiguration config = plugin.getConfig();
+        if (cmd.getName().equalsIgnoreCase("reloadconfig")) {
             if (args.length > 0) {
                 sender.sendMessage(ChatColor.RED + "To many arguments.");
                 return false;
@@ -41,7 +44,7 @@ public class ReloadConfig implements CommandExecutor {
     public boolean hasReload(Player player) {
         if (player.hasPermission("plotrating.reload")) {
             return true;
-        } else if (player.hasPermission("plotra.*")) {
+        } else if (player.hasPermission("plotrating.e")) {
             return true;
         }
         return false;

@@ -7,3 +7,8 @@ authors: [ ambmt ]
 description: Plot Rating Plugin
 commands:
   reloadconfig:
+  
+  configreload:
+permissions:
+  plotrating.*:
+  plotrating.reload:
