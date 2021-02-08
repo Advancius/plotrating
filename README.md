@@ -20,7 +20,7 @@ In order to try this out you need the following software to be installed on your
 
 Clone the template project to your system:
 ````bash
-git clone https://github.com/Advancius/plotrating
+git clone https://github.com/Advancius/plotrating.git
 ````
 
 This project uses [Maven](https://maven.apache.org/) for building. So on your command line run
