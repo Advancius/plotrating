@@ -54,7 +54,7 @@ Start the Mincraft client on your computer and connect to the local Mincraft ser
 Open the command line in Minecraft (by pressing `t`) try the new command and see what happens:
 ```
 /rate 10 (while in a plot will give you and the plot owner a reward)
-/configreload
+/plotratingreload
 ````
 
 To play with the code e.g. import this plugin in [Intellij](https://www.jetbrains.com/de-de/idea/download/). The
