@@ -6,9 +6,8 @@ depend: [ PlotSquared ]
 authors: [ ambmt ]
 description: Plot Rating Plugin
 commands:
-  reloadconfig:
-  
-  configreload:
+  plotratingreload:
+
 permissions:
-  plotrating.*:
+  plotrating.admin:
   plotrating.reload:

@@ -10,3 +10,5 @@ SenderCommand: "heal"
 SenderCommandAfter: ""
 PlotOwnerCommand: "feed"
 PlotOwnerCommandAfter: ""
+SendRatingMessage: true #ONLY TRUE OR FALSE
+SendErrorMessage: true #ONLY TRUE OR FALSE

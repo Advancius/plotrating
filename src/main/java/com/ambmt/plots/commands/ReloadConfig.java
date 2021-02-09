@@ -19,7 +19,7 @@ public class ReloadConfig implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
         final FileConfiguration config = plugin.getConfig();
-        if (cmd.getName().equalsIgnoreCase("reloadconfig")) {
+        if (cmd.getName().equalsIgnoreCase("plotratingreload")) {
             if (args.length > 0) {
                 sender.sendMessage(ChatColor.RED + "To many arguments.");
                 return false;
@@ -44,7 +44,7 @@ public class ReloadConfig implements CommandExecutor {
     public boolean hasReload(Player player) {
         if (player.hasPermission("plotrating.reload")) {
             return true;
-        } else if (player.hasPermission("plotrating.e")) {
+        } else if (player.hasPermission("plotrating.admin")) {
             return true;
         }
         return false;

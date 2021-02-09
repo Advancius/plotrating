@@ -30,7 +30,7 @@ public final class PlotRating extends JavaPlugin implements CommandExecutor {
         final FileConfiguration config = getConfig();
         saveDefaultConfig();
         PluginManager pm = getServer().getPluginManager();
-        this.getCommand("reloadconfig").setExecutor((CommandExecutor) new ReloadConfig(this));
+        this.getCommand("plotratingreload").setExecutor((CommandExecutor) new ReloadConfig(this));
 
 
 
@@ -46,17 +46,22 @@ public final class PlotRating extends JavaPlugin implements CommandExecutor {
             String plotOwnerCommand = getConfig().getString("PlotOwnerCommand");
             String plotOwnerCommandAfter = getConfig().getString("PlotOwnerCommandAfter");
             String senderCommandAfter = getConfig().getString("SenderCommandAfter");
-            event.getPlot().getMembers();
+            String sendRatingMessage = getConfig().getString("SendRatingMessage");
+            String sendErrorMessage = getConfig().getString("SendErrorMessage");
             UUID owner = event.getPlot().getOwner();
             Player owners = Bukkit.getPlayer(owner);
-            event.getRater().sendMessage(ChatColor.DARK_PURPLE + "Thank you for rating the plot ");
+            if(getConfig().getBoolean("SendRatingMessage") == true)  {
+                event.getRater().sendMessage(ChatColor.LIGHT_PURPLE + "Thank you for rating the plot ");
+            }
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), senderCommand + " " + event.getRater() + " " + senderCommandAfter);
             System.out.println(senderCommand);
             try {
                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), plotOwnerCommand + " " + Objects.requireNonNull(Bukkit.getPlayer(owner)).getName() + " " + plotOwnerCommandAfter);
             } catch (NullPointerException e) {
                 System.out.println("Error Occurred, owner of plot is most likely offline ");
-                event.getRater().sendMessage(ChatColor.DARK_BLUE + ("Player is offline, thank you for rating the plot"));
+                if(getConfig().getBoolean("SendErrorMessage") == true) {
+                    event.getRater().sendMessage(ChatColor.YELLOW + ("Player is offline, thank you for rating the plot"));
+                }
 
             }
 
