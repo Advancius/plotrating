@@ -55,18 +55,13 @@ public final class PlotRating extends JavaPlugin implements CommandExecutor {
             }
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), senderCommand + " " + event.getRater() + " " + senderCommandAfter);
             System.out.println(senderCommand);
-            try {
+
                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), plotOwnerCommand + " " + Objects.requireNonNull(Bukkit.getPlayer(owner)).getName() + " " + plotOwnerCommandAfter);
-            } catch (NullPointerException e) {
-                System.out.println("Error Occurred, owner of plot is most likely offline ");
-                if(getConfig().getBoolean("SendErrorMessage") == true) {
-                    event.getRater().sendMessage(ChatColor.YELLOW + ("Player is offline, thank you for rating the plot"));
-                }
+
 
             }
 
         }
-    }
 
         @Override
         public void onDisable() {
