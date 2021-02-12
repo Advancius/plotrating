@@ -46,8 +46,9 @@ public final class PlotRating extends JavaPlugin implements CommandExecutor {
             String plotOwnerCommand = getConfig().getString("PlotOwnerCommand");
             String plotOwnerCommandAfter = getConfig().getString("PlotOwnerCommandAfter");
             String senderCommandAfter = getConfig().getString("SenderCommandAfter");
-            String sendRatingMessage = getConfig().getString("SendRatingMessage");
             String sendErrorMessage = getConfig().getString("SendErrorMessage");
+            String offlineOwner = getConfig().getString("PlotOwnerOffline");
+            String offlineOwnerAfter = getConfig().getString("PlotOwnerOfflineAfter");
             UUID owner = event.getPlot().getOwner();
             Player owners = Bukkit.getPlayer(owner);
             if(getConfig().getBoolean("SendRatingMessage") == true)  {
@@ -56,7 +57,13 @@ public final class PlotRating extends JavaPlugin implements CommandExecutor {
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), senderCommand + " " + event.getRater() + " " + senderCommandAfter);
             System.out.println(senderCommand);
 
-                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), plotOwnerCommand + " " + Objects.requireNonNull(Bukkit.getPlayer(owner)).getName() + " " + plotOwnerCommandAfter);
+                try {
+                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), plotOwnerCommand + " " + Bukkit.getPlayer(owner).getName() + " " + plotOwnerCommandAfter);
+                }catch(NullPointerException e){
+                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), offlineOwner + " " + Bukkit.getOfflinePlayer(owner).getName() + " "+ offlineOwnerAfter);
+
+
+            }
 
 
             }

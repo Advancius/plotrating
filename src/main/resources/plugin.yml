@@ -9,5 +9,9 @@ commands:
   plotratingreload:
 
 permissions:
-  plotrating.admin:
   plotrating.reload:
+    description: Allows you to reload pluign
+  plotrating.admin:
+    description: Access to all commands
+    default: op
+
