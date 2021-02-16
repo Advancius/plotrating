@@ -14,3 +14,4 @@ PlotOwnerOffline: ""
 PlotOwnerOfflineAfter: ""
 SendRatingMessage: true #ONLY TRUE OR FALSE
 SendErrorMessage: true #ONLY TRUE OR FALSE
+CooldownTime: 10 #In seconds
